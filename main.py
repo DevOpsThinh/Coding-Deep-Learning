@@ -2,24 +2,18 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-from math import sqrt
-
-
-def print_basic_arithmetic(result):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Result: {result}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-def tuple_distance(tuple1, tuple2):
-    return sqrt((tuple1[0] - tuple2[0]) ** 2 + (tuple1[1] - tuple2[1]) ** 2)
-
+# Use a breakpoint in the code line below to debug your script.
+from fundamentals.custom_functions import *
+from object_oriented_mindset.cartesian_system_coordinate import Point
+from object_oriented_mindset.util_cartesian_system_coordinate import *
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # Basic Arithmetic:
+    print_basic_arithmetic()
     print_basic_arithmetic(((4 - 2) + 4) / 5 * 9)
     # Variable Assignment:
-    x = (1, 0)
+    x = (1, 0)  # Tuple: stores multiple fixed values in a sequence
     y = (5, 3)
     print(f'Distance between {x} & {y} is {tuple_distance(x, y)}')
     # Strings
@@ -28,7 +22,7 @@ if __name__ == '__main__':
     print(s1 + s2)
     my_age = 31
     print('My age is: {}'.format(my_age - 2))
-    # Lists
+    # Lists (stores multiple values in an ordered index)
     aList = [5, 6, 7, 8, 9, True, 'a lot of different type of things']
     print(aList)
     otherList = [1, 2, 3, 4] + aList
@@ -42,6 +36,7 @@ if __name__ == '__main__':
     print(otherList)
     otherList.append(True)
     print(otherList)
+    # Set (stores multiple unique values in an unordered collection)
     # Sets operations: Union - Intersection - Difference
     A = {'Dog', 'Cat', 'Pig', 'Chicken', 'Rabbit', 'Turtle'}
     B = {'Dog', 'Chicken', 'Monkey', 'Cow'}
@@ -51,5 +46,43 @@ if __name__ == '__main__':
     print('The intersection of set A & set B is: ', N)
     D = A.difference(B)
     print('The difference of set A & set B is ', D)
+    # Dictionary (stores multiple unordered key:value pairs)
+    info_dict_dev = {'name': 'DevOpsThinh', 'majors': 'Mobile Engineer', 'age': '29'}
+    info_dict_tester = {'name': 'NgocMai', 'majors': 'Tester', 'age': '24'}
+    info_dict_po = {'name': 'VanToan', 'majors': 'Product Owner', 'age': '32'}
+    info_dict_boss = {'name': 'Thang', 'majors': 'Director', 'age': '35'}
+    print('Info: ', info_dict_dev)
+    print('Is There A specialized Key?: ', 'specialized' in info_dict_dev)
+    # Logic & Loops
+    for i in range(0, 10):
+        boolIsGreaterThanSix = (i >= 3)
+        if i == 5:
+            print('Ignores at 5, continues at i = 6')
+            continue
+        if i == 9:
+            print('Over flow at i = 9')
+            break
+        print(f'{i} - Spam: {boolIsGreaterThanSix}')
+
+    for i in range(0, 30):
+        my_step_by_steps = (i % 3)
+        if my_step_by_steps == 0:
+            print(i)
+
+    cube_nums = [i ** 3 for i in range(10)]
+    print(cube_nums)
+
+    # Custom functions
+    friends_stock_list = [info_dict_dev, info_dict_tester, info_dict_po, info_dict_boss]
+    data = get_data_from_list(friends_stock_list)
+    print(data)
+    # Objects
+    p_x = Point(1, 0)
+    p_y = Point(5, 3)
+    # draw(p_x.x, p_x.y)
+    # draw(p_y.x, p_y.y)
+    print(f'\nDistance between {p_x} & {p_y} is {p_x.distance(p_y)}')
+    del p_x
+    del p_y
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
