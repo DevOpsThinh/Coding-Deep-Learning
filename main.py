@@ -76,11 +76,23 @@ if __name__ == '__main__':
     friends_stock_list = [info_dict_dev, info_dict_tester, info_dict_po, info_dict_boss]
     data = get_data_from_list(friends_stock_list)
     print(data)
+    # File operations
+    file_name = 'dreariness.txt'
+    content = 'She love me!\n'
+    content += 'Yeah\n'
+    content += '\tYeah\n'
+    content += '\t\tYeah\n'
+    write_a_file(file_name, 'w', content)
+    read_a_file(file_name, 'r')
+    update_a_file_with_block(file_name, 'r+', content, 35)
+    re_write_a_file(file_name)
+    file_with_pickle_data('pickle.dat')
+
     # Objects
     p_x = Point(1, 0)
     p_y = Point(5, 3)
-    # draw(p_x.x, p_x.y)
-    # draw(p_y.x, p_y.y)
+    draw(p_x.x, p_x.y)
+    draw(p_y.x, p_y.y)
     print(f'\nDistance between {p_x} & {p_y} is {p_x.distance(p_y)}')
     del p_x
     del p_y
