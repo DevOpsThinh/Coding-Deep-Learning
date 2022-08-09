@@ -1,13 +1,67 @@
 # Author: Nguyen Truong Thinh
 # Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
+#
+# Custom functions section
+
+import os
+import pickle
 from math import sqrt
-import pickle, os
 
 
-# Custom functions
+def indentify(an_object):
+    """
+    [The final cornerstone principle of polymorphism].
+    A function to take an object of any type & call that object's methods
+    :param an_object: an object of any type (class, ...)
+    :return: None
+    :exception: A run-time error
+    """
+    an_object.who_am_i()
+
+
+def exam_built_in_attributes(an_object):
+    """
+    Examining built-in attributes
+    :param an_object: An instance of class
+    :return: None
+    """
+    print('\nBuilt-in instance attributes...')
+    for attrib in dir(an_object):
+        if attrib[0] == '_':
+            print(attrib)
+
+    print("\nInstance Dictionary...")
+    for i in an_object.__dict__:
+        print(i, ": ", an_object.__dict__[i])
+
+
+def exam_built_in_class_dictionary(a_class):
+    """
+    Examining built-in attributes
+    :param a_class: A class type
+    :return: None
+    """
+    print('\nClass Dictionary...')
+    for i in a_class.__dict__:
+        print(i, ": ", a_class.__dict__[i])
+
+
+def addressing_class_instance_attributes(an_object):
+    """
+    Addressing class attributes
+    :param an_object: An instance of class
+    :return: None
+    """
+    print('\nClass instances of:\n', an_object.__doc__)
+    print('\nClass instance attributes...')
+    for attrib in dir(an_object):
+        if attrib[0] != '_':
+            print(attrib, ":", getattr(an_object, attrib))
+
+
 def file_with_pickle_data(file_name):
     """
-    Pickling data for more efficient to use a machine-readable binary file.
+    Pickling data for more efficient to use a machine-readable binary file
     :param file_name: Name of the file
     :return: None
     """
@@ -138,6 +192,6 @@ def tuple_distance(tuple1, tuple2):
     return sqrt((tuple1[0] - tuple2[0]) ** 2 + (tuple1[1] - tuple2[1]) ** 2)
 
 
-def print_basic_arithmetic(result = 'I would like to have a result of arithmetic expression please.'):
+def print_basic_arithmetic(result='I would like to have a result of arithmetic expression please.'):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Result: {result}')  # Press Ctrl+F8 to toggle the breakpoint.

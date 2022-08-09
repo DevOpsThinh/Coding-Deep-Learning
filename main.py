@@ -5,6 +5,7 @@
 # Use a breakpoint in the code line below to debug your script.
 from fundamentals.custom_functions import *
 from object_oriented_mindset.cartesian_system_coordinate import Point
+from object_oriented_mindset.polygon import *
 from object_oriented_mindset.util_cartesian_system_coordinate import *
 
 # Press the green button in the gutter to run the script.
@@ -71,7 +72,6 @@ if __name__ == '__main__':
 
     cube_nums = [i ** 3 for i in range(10)]
     print(cube_nums)
-
     # Custom functions
     friends_stock_list = [info_dict_dev, info_dict_tester, info_dict_po, info_dict_boss]
     data = get_data_from_list(friends_stock_list)
@@ -87,7 +87,6 @@ if __name__ == '__main__':
     update_a_file_with_block(file_name, 'r+', content, 35)
     re_write_a_file(file_name)
     file_with_pickle_data('pickle.dat')
-
     # Objects
     p_x = Point(1, 0)
     p_y = Point(5, 3)
@@ -96,5 +95,32 @@ if __name__ == '__main__':
     print(f'\nDistance between {p_x} & {p_y} is {p_x.distance(p_y)}')
     del p_x
     del p_y
+
+    rect = Rectangle()
+    rect.name = 'Rectangles'
+    indentify(rect)
+    rect.set_values(4, 5)
+    print("Rectangle Area: ", rect.area())
+    rect.scale(2)
+    Polygon.scale(rect, 2)
+    print("Rectangle Area: ", rect.area())
+
+    tria = Triangle()
+    tria.name = 'Triangles'
+    indentify(tria)
+    tria.set_values(4, 5)
+    print("Triangle Area: ", tria.area())
+    tria.scale(2)
+    Polygon.scale(tria, 2)
+    print("Triangle Area: ", tria.area())
+
+    print('The number of polygons: ', tria.count)
+
+    addressing_class_instance_attributes(tria)
+    exam_built_in_attributes(tria)
+    exam_built_in_class_dictionary(Triangle)
+
+    del rect
+    del tria
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
