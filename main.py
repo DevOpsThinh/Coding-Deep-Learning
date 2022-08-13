@@ -56,14 +56,14 @@ if __name__ == '__main__':
     print('Is There A specialized Key?: ', 'specialized' in info_dict_dev)
     # Logic & Loops
     for i in range(0, 10):
-        boolIsGreaterThanSix = (i >= 3)
+        boolIsGreaterThanThree = (i >= 3)
         if i == 5:
             print('Ignores at 5, continues at i = 6')
             continue
         if i == 9:
             print('Over flow at i = 9')
             break
-        print(f'{i} - Spam: {boolIsGreaterThanSix}')
+        print(f'{i} - Spam: {boolIsGreaterThanThree}')
 
     for i in range(0, 30):
         my_step_by_steps = (i % 3)
@@ -72,6 +72,13 @@ if __name__ == '__main__':
 
     cube_nums = [i ** 3 for i in range(10)]
     print(cube_nums)
+
+    a_number = 20
+    while a_number > 10:
+        a_number -= 3
+        if a_number < 10:
+            break
+        print("value: ", a_number)
     # Custom functions
     friends_stock_list = [info_dict_dev, info_dict_tester, info_dict_po, info_dict_boss]
     data = get_data_from_list(friends_stock_list)
