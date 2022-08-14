@@ -73,5 +73,7 @@ for i in other_array:
 x = np.array(range(0, 9))
 y = np.sqrt(x)
 plt.plot(x, y)
+plt.grid()
+plt.show()
 print('\nMy an other array y has values: ', y)
 
