@@ -2,6 +2,8 @@
 # Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
 #
 # Package & libraries for scientific computing section
+# Numpy - a package: It is useful for its simpler mathematical functions
+# Ref: numpy.org
 from matplotlib import pyplot as plt
 
 import numpy as np
@@ -68,7 +70,7 @@ print('\nArray 3:\n', array_3)
 
 other_array = np.array([1, 2, 3, 4, 5])
 for i in other_array:
-    print(i**3 + i)
+    print(i ** 3 + i)
 
 x = np.array(range(0, 9))
 y = np.sqrt(x)
@@ -76,4 +78,3 @@ plt.plot(x, y)
 plt.grid()
 plt.show()
 print('\nMy an other array y has values: ', y)
-
