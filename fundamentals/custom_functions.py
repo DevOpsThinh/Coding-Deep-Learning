@@ -6,6 +6,28 @@
 import os
 import pickle
 from math import sqrt
+import matplotlib.pyplot as plt
+
+# Set the plotting DPI settings to be a bit higher.
+plt.rcParams['figure.figsize'] = [8.0, 5.0]
+plt.rcParams['figure.dpi'] = 150
+
+
+def make_the_graph(data, title, x_label, y_label):
+    """
+    Plotting the data for make the graph
+    :param data: The data will be plotted
+    :param title: The graph's title
+    :param x_label: The x-axis's title
+    :param y_label: The y-axis's title
+    :return: None
+    """
+    plt.plot(data)
+    plt.title(title)
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    plt.grid()
+    plt.show()
 
 
 def indentify(an_object):

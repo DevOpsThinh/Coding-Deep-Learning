@@ -5,6 +5,7 @@
 # Pandas: To read & write data to your operating system & to analyse & manipulate data.
 # Ref: https://pandas.pydata.org/pandasdocs/stable/reference/index.html
 # Ref: https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf
+# Ref: https://pandas-datareader.readthedocs.io/en/latest/
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -43,6 +44,9 @@ plt.xlabel('Value in USD currency')
 plt.ylabel('Number of Instances')
 plt.grid()
 plt.show()
+
 print('Max value is: ', income_data[income_data['Fiscal Year'] == 2020]['Net Income'].max())
 income_data.describe()
 income_data_2020 = income_data[income_data['Fiscal Year'] == 2020]
+print(income_data_2020.head(10))
+print(income_data_2020.tail())
