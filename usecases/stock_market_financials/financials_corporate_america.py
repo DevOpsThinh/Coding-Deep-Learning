@@ -6,6 +6,7 @@
 
 import pandas as pd
 import pandas_datareader.data as pdr
+
 from fundamentals.custom_functions import make_the_graph
 
 start = pd.to_datetime('2020-12-01')
