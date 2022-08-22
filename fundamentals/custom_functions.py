@@ -6,11 +6,28 @@
 import os
 import pickle
 from math import sqrt
+
+import idx2numpy
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Set the plotting DPI settings to be a bit higher.
 plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
+
+
+def show_img(num, train_images_file, train_labels_file):
+    """
+     Functions to show an image
+    """
+    train_data = idx2numpy.convert_from_file(train_images_file)
+    train_data = np.reshape(train_data, (60000, 28 * 28))
+    train_label = idx2numpy.convert_from_file(train_labels_file)
+    img = train_data[num, :]
+    img = img.reshape(28, -1)
+    print(str(img.shape) + '  No.' + str(num) + '  label:' + str(train_label[num]))
+    plt.imshow(img, cmap='gray')
+    plt.show()
 
 
 def make_the_graph(data, title, x_label, y_label):
