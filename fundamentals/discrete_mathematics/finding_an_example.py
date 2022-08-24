@@ -11,7 +11,7 @@
 from itertools import permutations, combinations
 
 # Does there exist a six-digit integer that starts with 100 & is a multiple of 9127
-# 100000 <= 9127k <= 100999 <=> 10.95
+# (100000 <= 9127k <= 100999) <=> (10.95 <= k <= 11.06) => k = 11
 for i in range(100000, 101000):
     if i % 9127 == 0:
         print(i)
@@ -61,3 +61,21 @@ def extend(perms, i):
 
 
 extend(perms=[], i=3)
+
+
+def can_be_extended(perms):
+    i = len(perms) - 1
+    return all(i - j != abs(perms[i] - perms[j]) for j in range(i))
+
+
+def extend(perms, n):
+    if len(perms) == n:
+        print(perms)
+        exit()
+    for k in range(n):
+        if k not in perms:
+            if can_be_extended(perms + [k]):
+                extend(perms + [k], n)
+
+
+extend(perms=[], n=16)
