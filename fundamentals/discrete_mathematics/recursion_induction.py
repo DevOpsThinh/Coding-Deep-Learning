@@ -5,6 +5,10 @@
 # Recursion & Induction:
 #       Analyzing the correctness & running time of algorithms.
 
+from math import log2
+
+import matplotlib.pyplot as plt
+import numpy as np
 from numpy import prod
 
 
@@ -115,7 +119,7 @@ print(with_draw_non_recursive(13))
 
 
 # The classical Hanoi Towers puzzle
-# T(i) = 2T(n - 1) + 1: T(7) = 2 x 63 + 1 = 127 || T(8) = 2 * 127 + 1 = 255
+# T(i) = 2T(i - 1) + 1: T(7) = 2 x 63 + 1 = 127 || T(8) = 2 * 127 + 1 = 255
 def hanoi_towers(i, from_rod, to_rod):
     if i == 1:
         print(f'Move disk from {from_rod} to {to_rod}')
@@ -127,3 +131,86 @@ def hanoi_towers(i, from_rod, to_rod):
 
 
 hanoi_towers(3, 1, 2)
+
+
+# Binary Search - Slowly growing function: log(2)n = b if 2^b = n.
+# Guess a number problem
+def query(y):
+    x = 1618235
+    if x == y:
+        return 'equal'
+    elif x < y:
+        return 'smaller'
+    else:
+        return 'greater'
+
+
+def guess(lower, upper):
+    middle = (lower + upper) // 2
+    answer = query(middle)
+    print(f'Is x = {middle}? It is {answer}.')
+    if answer == 'equal':
+        return
+    elif answer == 'smaller':
+        guess(lower, middle - 1)
+    else:
+        assert answer == 'greater'
+        guess(middle + 1, upper)
+
+
+# Guess an integer 1<= x <= 2097151
+guess(1, 2097151)
+
+
+def divide_till_one(r):
+    divisions = 0
+    while r > 1:
+        r = r // 2
+        divisions += 1
+    return divisions
+
+
+# If n <= 10^9 => log(2)n < 30
+for i in range(1, 10):
+    n = 10 ** i
+    print(f'{n} {log2(n)} {divide_till_one(n)}')
+
+# "Linear scan" with python
+print(5 in [1, 3, 4, 11, 5, 10, 7, 8, 2, 9])
+print(6 in [1, 3, 4, 11, 5, 10, 7, 8, 2, 9])
+
+
+def binary_search(a, x):
+    print(f'Searching {x} in {a}')
+
+    if len(a) == 0:
+        return False
+    if a[len(a) // 2] == x:
+        print('Found!')
+        return True
+    elif a[len(a) // 2] < x:
+        return binary_search(a[len(a) // 2 + 1:], x)
+    else:
+        return binary_search(a[:len(a) // 2], x)
+
+
+binary_search([1, 3, 5, 11, 4, 10, 7, 8, 2, 9], 5)
+binary_search([1, 2, 3, 4, 5, 7, 8, 9, 10, 11], 5)
+
+# Induction
+# n >= 1, the sum of integers from 1 to n is n(n+1) / 2
+for i in (17, 251, 1356):
+    assert sum(range(1, i + 1)) == i * (i + 1) // 2
+
+# Compound Percents
+# Bernoulli's inequality: x >= -1 and n >= 0: (1 + x)^n >= 1 + xn
+
+plt.xlabel('$n$')
+plt.ylabel('Money (vnd)')
+
+x = np.arange(250)
+plt.plot(x, 1.02 ** x, label='$1.02^n$')
+plt.plot(x, 1 + 0.02 * x, label='1+0.2^n')
+plt.legend(loc='upper left')
+plt.savefig('bernoulli.png')
+plt.show()
