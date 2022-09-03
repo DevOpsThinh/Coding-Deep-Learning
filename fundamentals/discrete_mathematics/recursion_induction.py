@@ -5,6 +5,7 @@
 # Recursion & Induction:
 #       Analyzing the correctness & running time of algorithms.
 
+from itertools import accumulate
 from math import log2
 
 import matplotlib.pyplot as plt
@@ -69,7 +70,7 @@ print(factorial_with_zero_func(9))
 print(factorial_with_zero_control_flow(9))
 
 
-# Recuse with Care
+# Recurse with Care
 # n >= 8, n = 3 + 5 + 3 + 5 + ... || n = 3 + 3 +, ... || n = 5 + 5 + ...
 def with_draw(amount):
     assert amount >= 8
@@ -202,6 +203,7 @@ binary_search([1, 2, 3, 4, 5, 7, 8, 9, 10, 11], 5)
 for i in (17, 251, 1356):
     assert sum(range(1, i + 1)) == i * (i + 1) // 2
 
+
 # Compound Percents
 # Bernoulli's inequality: x >= -1 and n >= 0: (1 + x)^n >= 1 + xn
 
@@ -214,3 +216,85 @@ plt.plot(x, 1 + 0.02 * x, label='1+0.2^n')
 plt.legend(loc='upper left')
 plt.savefig('bernoulli.png')
 plt.show()
+
+
+def sum_of_integers(x):
+    """
+    Computes the sum of the first n positive integers: 1 + 2 + ... + n
+    :param x: A positive integer n
+    :return: The sum of the first n positive integers
+    """
+    assert x > 0
+    print(f'Sum of the first {x} positive integers: {sum(range(1, x + 1))}')
+    return sum(range(1, x + 1))
+
+
+sum_of_integers(1000)
+# Prove an even stronger statement: 1 + 2 + ... + n = n(n + 1) / 2, 1 ... i ... n
+print(all(sum(range(1, n + 1)) == n * (n + 1) // 2 for n in range(1, 101)))  # True
+
+
+# Bernoulli's Inequality
+# How many days of 2% compound interest does it take to get from $1,000 to $1,000,000
+def days_to_target(starting_amount, earn_percent, target_amount):
+    day = 1
+    amount = starting_amount
+    daily_factor = (1 + earn_percent / 100.0)
+    while amount < target_amount:
+        day = day + 1
+        amount = amount * daily_factor
+
+    print(f'If I start with ${starting_amount} '
+          f'and earn {earn_percent}% a day,\n'
+          f'I will have more than ${target_amount} '
+          f'on day {day}!')
+    return day
+
+
+days_to_target(1000, 2, 1000000)
+
+
+# Or how much money will I have after a year?
+def how_much_money_after_a_year(starting_amount, earn_percent, day):
+    daily_factor = 1 + (earn_percent / 100.0)
+    print(f'If I start with ${starting_amount} '
+          f'and earn {earn_percent}% a day,\n'
+          f'on day {day} I will have more than '
+          f'${int(starting_amount * (daily_factor ** (day - 1)))}!')
+    return starting_amount * (daily_factor ** (day - 1))
+
+
+how_much_money_after_a_year(1000, 2, 365)
+
+# Prove that 2^n >= n^3, n >= 10
+for i in [10, 15]:
+    plt.clf()
+    n = np.linspace(2, i)
+    plt.plot(n, n ** 3, label='$n^3')
+    plt.plot(n, 2 ** n, label='$2^n')
+    plt.legend(loc='upper left')
+    plt.savefig(f'where_to_start_induction_prove_2n_n3{i}.png')
+    plt.show()
+
+# Prove 1 / i(i + 1) < 1, 1 ... i ... n
+n = 1000
+sums = [*accumulate(1 / (i * (i + 1)) for i in range(1, n + 1))]
+for j in (n // 10, n):
+    plt.clf()
+    plt.plot(sums[:j])
+    plt.savefig(f'sum_{j}.png')
+    plt.show()
+
+    """
+            Summary
+            
+        - Mathematical induction is used to prove that some statements A(i) hold for
+        all values of i.
+        - An induction proof consists of two parts: The base case & the induction step.
+        - The base case assures that A(i) holds for some (not necessarily small) values of i.
+        - The base case & the induction step must be consistent: If the induction step uses
+        A(n) & A(n - 1), then the base case should cover at least 2 consecutive values of n.
+        - The induction step for proving A(n + 1) can use A(n) or even all A(i) for i <= n,
+        the latter is called strong induction.
+        - Sometimes proving a stronger statement by induction may be easier.
+    """
