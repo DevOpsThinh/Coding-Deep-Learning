@@ -4,6 +4,14 @@
 # Topic: Mathematical Thinking in Computer Science
 
 
+def print_it(it):
+    """
+    Print an expression with formatting
+    :param it: An expression will be print
+    """
+    print(*it, sep='', end=' ')
+
+
 def represent(n, value):
     """
     Tries to represent the given value by placing signs in the expression 1 +- 2 +- ... +- n.
