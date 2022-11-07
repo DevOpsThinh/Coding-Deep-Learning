@@ -1,4 +1,4 @@
-# Author: Nguyen Truong Thinh
+# Co-Author/ Learner: Nguyen Truong Thinh
 # Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
 #
 # The helper functions
@@ -9,6 +9,13 @@ import seaborn as sns
 # Set the plotting DPI settings to be a bit higher.
 plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
+
+
+def gradient_two_variables(x, y, w, b):
+    """ Calculate the gradient of the curve """
+    w_gradient = 2 * np.average(x * (predict(x, w, b) - y))
+    b_gradient = 2 * np.average(predict(x, w, b) - y)
+    return w_gradient, b_gradient
 
 
 def predict(x, w, b):
