@@ -11,6 +11,25 @@ plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 
 
+def train_with_history(x, y, iterations, lr, precision, init_w, init_b):
+    w, b = init_w, init_b
+
+    previous_loss = loss(x, y, w, b)
+    history = [[w, b, previous_loss]]
+    for i in range(0, iterations):
+        w_gradient, b_gradient = gradient_two_variables(x, y, w, b)
+        w -= lr * w_gradient
+        b -= lr * b_gradient
+
+        c_loss = loss(x, y, w, b)
+        history.append([w, b, previous_loss])
+
+        if abs(c_loss - previous_loss) < precision:
+            return w, b, history
+        previous_loss = c_loss
+    raise Exception("Couldn't converge within %d iterations" % iterations)
+
+
 def gradient_two_variables(x, y, w, b):
     """ Calculate the gradient of the curve """
     w_gradient = 2 * np.average(x * (predict(x, w, b) - y))
