@@ -12,7 +12,7 @@ from matplotlib import cm
 from ml.util import loss, load_text_dataset, train_with_history
 
 # Import the dataset & train model
-X, Y = load_text_dataset("../../../fundamentals/datasets/pizza.txt")
+X, Y = load_text_dataset("../../../fundamentals/datasets/pizza_forester/pizza.txt")
 w, b, _history = train_with_history(X, Y, iterations=100000, lr=0.001,
                                     precision=0.000001, init_w=-10, init_b=-100)
 # Prepare history

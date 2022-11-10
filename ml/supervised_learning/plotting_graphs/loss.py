@@ -13,7 +13,7 @@ from ml.util import loss, load_text_dataset
 plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 # Import the dataset
-X, Y = load_text_dataset("../../../fundamentals/datasets/pizza.txt")
+X, Y = load_text_dataset("../../../fundamentals/datasets/pizza_forester/pizza.txt")
 # Compute losses for w ranging from -1 to 4
 weights = np.linspace(-1.0, 4.0, 200)
 losses = [loss(X, Y, w, 0) for w in weights]

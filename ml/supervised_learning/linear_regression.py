@@ -42,7 +42,7 @@ def train(x, y, iterations, lr):
 
 
 # Import the dataset
-X, Y = np.loadtxt("../../fundamentals/datasets/pizza.txt", skiprows=1, unpack=True)
+X, Y = np.loadtxt("../../fundamentals/datasets/pizza_forester/pizza.txt", skiprows=1, unpack=True)
 # Training phase: train the system
 W = train(X, Y, iterations=10000, lr=0.01)
 print("\nw=%.3f" % W)
