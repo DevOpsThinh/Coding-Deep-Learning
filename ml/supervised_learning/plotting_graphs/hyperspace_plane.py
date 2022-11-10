@@ -2,7 +2,7 @@
 # Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
 #
 # Topic: Multiple Linear regression (Hyperspace) with Gradient Descent
-#           Plot a plane that roughly approximates a dataset with three input variables.
+#           Plot a plane that roughly approximates a dataset with two input variables.
 
 import matplotlib.pyplot as plt
 import numpy as np
