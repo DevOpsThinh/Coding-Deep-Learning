@@ -16,7 +16,7 @@ def train(x, y, iterations, lr):
 
 
 # Import the dataset
-X, Y = load_text_dataset("../../fundamentals/datasets/pizza_forester/pizza.txt")
+X, Y = load_text_dataset("../../../fundamentals/datasets/pizza_forester/pizza.txt")
 # Training phase: train the system
 w, b = train(X, Y, iterations=20000, lr=0.001)
 print("\nw=%.10f, b=%.10f" % (w, b))

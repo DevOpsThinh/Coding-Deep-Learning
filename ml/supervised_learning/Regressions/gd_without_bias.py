@@ -20,7 +20,7 @@ def train(x, y, iterations, lr):
     return wei
 
 
-X, Y = load_text_dataset("../../fundamentals/datasets/pizza_forester/pizza.txt")
+X, Y = load_text_dataset("../../../fundamentals/datasets/pizza_forester/pizza.txt")
 # Training phase: train the system
 w = train(X, Y, iterations=100, lr=0.001)
 print("\nw=%.10f" % w)
