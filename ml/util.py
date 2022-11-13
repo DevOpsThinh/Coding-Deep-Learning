@@ -11,6 +11,38 @@ plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 
 
+def train(x, y, iterations, lr):
+    w = np.zeros((x.shape[1], 1))
+    for i in range(iterations):
+        w -= gradient(x, y, w) * lr
+    return w
+
+
+def sigmoid(z):
+    """The logistic function: z = 1 / (1 + e^-z)"""
+    return 1 / (1 + np.exp(-z))
+
+
+def forward(x, w):
+    wei_sum = np.matmul(x, w)
+    return sigmoid(wei_sum)
+
+
+def classify(x, w):
+    return np.round(forward(x, w))
+
+
+def lower_loss(x, y, w):
+    y_hat = forward(x, w)
+    first_term = y * np.log(y_hat)
+    second_term = (1 - y) * np.log(1 - y_hat)
+    return -np.average(first_term + second_term)
+
+
+def gradient(x, y, w):
+    return np.matmul(x.T, (forward(x, w) - y)) / x.shape[0]
+
+
 def train_with_history(x, y, iterations, lr, precision, init_w, init_b):
     w, b = init_w, init_b
 
