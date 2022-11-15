@@ -5,7 +5,7 @@
 #           The binary classification: a classifier work with categorical labels.
 import numpy as np
 
-from ml.util import load_text_dataset, gradient, lower_loss, classify
+from ml.util import load_text_dataset, gradient, lower_loss, test
 
 
 def train(x, _y, iterations, lr):
@@ -14,14 +14,6 @@ def train(x, _y, iterations, lr):
         print("Iteration %4d => Loss: %.20f" % (i, lower_loss(x, _y, _w)))
         _w -= gradient(x, _y, _w) * lr
     return _w
-
-
-def test(x, _y, _w):
-    total_examples = x.shape[0]
-    correct_results = np.sum(classify(x, _w) == _y)
-    success_percent = correct_results * 100 / total_examples
-    print("\nSuccess: %d/%d (%.2f%%)" %
-          (correct_results, total_examples, success_percent))
 
 
 # Prepare data: import the dataset & classify

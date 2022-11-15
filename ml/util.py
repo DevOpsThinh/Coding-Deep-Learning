@@ -11,6 +11,14 @@ plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 
 
+def test(x, _y, _w):
+    total_examples = x.shape[0]
+    correct_results = np.sum(classify(x, _w) == _y)
+    success_percent = correct_results * 100 / total_examples
+    print("\nSuccess: %d/%d (%.2f%%)" %
+          (correct_results, total_examples, success_percent))
+
+
 def train(x, y, iterations, lr):
     w = np.zeros((x.shape[1], 1))
     for i in range(iterations):
