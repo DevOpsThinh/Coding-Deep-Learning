@@ -10,6 +10,8 @@ import struct
 import matplotlib.pyplot as plt
 import numpy as np
 
+from ml.util import one_hot_encoding
+
 TRAIN_IMAGE = "../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
 TRAIN_LABEL = "../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
 TEST_IMAGE = "../../../fundamentals/datasets/mnist/t10k-images-idx3-ubyte.gz"
@@ -81,7 +83,12 @@ def show_a_digit(num):
 # 60000 labels, each with value 1 if digit is a five, and 0 otherwise
 Y_train_data = encode_fives(load_labels(TRAIN_LABEL))
 print(Y_train_data.shape)
+
+Y_train_unencoded = load_labels(TRAIN_LABEL)
+Y_train = one_hot_encoding(Y_train_unencoded, 10)
+
 # 10000 labels
 Y_test_data = encode_fives(load_labels(TEST_LABEL))
 print(Y_test_data.shape)
 
+Y_test = load_labels(TEST_LABEL)

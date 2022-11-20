@@ -11,6 +11,22 @@ plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 
 
+def one_hot_encoding(y, a_number):
+    """
+    A way of encoding labels is called one-hot encoding
+    :param a_number: The numbers of class
+    :param y: A matrix
+    :return: A encoded matrix with zero cold values (0s) & one hot value (1)
+    """
+    n_labels = y.shape[0]
+    n_classes = a_number
+    encoded_y = np.zeros((n_labels, n_classes))
+    for e in range(n_labels):
+        label = y[e]
+        encoded_y[e][label] = 1
+    return encoded_y
+
+
 def test(x, _y, _w):
     total_examples = x.shape[0]
     correct_results = np.sum(classify(x, _w) == _y)
