@@ -4,9 +4,8 @@
 # Topic: Supervised Learning: Classifications in Action.
 #           A primitive kind of support vector machine - Perceptron
 
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Can try two different arrangements of x
 # x = np.array([[1,2], [3,6], [4,7], [5,6], [1,3], [2.5,4], [2,3]])
