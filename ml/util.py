@@ -27,6 +27,15 @@ def one_hot_encoding(y, a_number):
     return encoded_y
 
 
+def prepend_bias(x):
+    """
+    Insert a column of 1s in the position 0 of X.
+    :param x: X examples - a matrix
+    :return: A new matrix
+    """
+    return np.insert(x, 0, 1, axis=1)
+
+
 def test(x, _y, _w):
     total_examples = x.shape[0]
     correct_results = np.sum(classify(x, _w) == _y)

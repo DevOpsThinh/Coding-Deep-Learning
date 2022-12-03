@@ -9,6 +9,7 @@ from ml.util import forward, gradient
 
 
 def classify(x, w):
+    """Predict the value of an unlabeled image"""
     y_hat = forward(x, w)
     labels = np.argmax(y_hat, axis=1)
     return labels.reshape(-1, 1)

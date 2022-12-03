@@ -10,7 +10,7 @@ import struct
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ml.util import one_hot_encoding
+from ml.util import prepend_bias, one_hot_encoding
 
 TRAIN_IMAGE = "../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
 TRAIN_LABEL = "../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
@@ -26,21 +26,16 @@ def load_images(filename):
         return all_pixels.reshape(n_images, columns * rows)
 
 
-def prepend_bias(x):
-    """
-    Insert a column of 1s in the position 0 of X.
-    :param x: X examples - a matrix
-    :return: A new matrix
-    """
-    return np.insert(x, 0, 1, axis=1)
-
-
 # 60000 images, each 785 (1 bias + 28 * 28) elements
 X_train_data = prepend_bias(load_images(TRAIN_IMAGE))
 print(X_train_data.shape)
 # 10000 images, each 785 (1 bias + 28 * 28) elements
 X_test_data = prepend_bias(load_images(TEST_IMAGE))
 print(X_test_data.shape)
+
+# Neural networks #
+X_train = load_images(TRAIN_IMAGE)  # no bias - 784 elements
+X_test = load_images(TEST_IMAGE)  # no bias - 784 elements
 
 
 def load_labels(filename):
@@ -85,10 +80,11 @@ Y_train_data = encode_fives(load_labels(TRAIN_LABEL))
 print(Y_train_data.shape)
 
 Y_train_unencoded = load_labels(TRAIN_LABEL)
+# 60000 labels, each consisting of 10 one-hot encoded elements
 Y_train = one_hot_encoding(Y_train_unencoded, 10)
 
 # 10000 labels
 Y_test_data = encode_fives(load_labels(TEST_LABEL))
 print(Y_test_data.shape)
-
+# 10000 labels, each a single digit from 0 to 9
 Y_test = load_labels(TEST_LABEL)

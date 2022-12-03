@@ -17,9 +17,9 @@ student_dict = {
 
 student_df = pd.DataFrame(student_dict)
 student_df.to_csv('it_student_k19.csv')
-my_data = pd.read_csv('it_student_k19.csv', index_col=0)
+my_data = pd.read_csv('../datasets/it_student_k19.csv', index_col=0)
 
-income_data = pd.read_csv('us-income-annual.csv', delimiter=';')
+income_data = pd.read_csv('../datasets/us-income-annual.csv', delimiter=';')
 print('DataFrame shape is: ', income_data.shape)
 print(income_data.keys())
 print('\nRevenue:\n', income_data['Revenue'])  # view a single column series

@@ -8,8 +8,7 @@ import pandas as pd
 
 # Get csv data
 income_data = pd.read_csv(
-    'D:/PythonInPractice/Coding-Deep-Learning/fundamentals/scientific_libraries/'
-    'us-income-annual.csv', delimiter=';')
+    '/fundamentals/datasets/us-income-annual.csv', delimiter=';')
 stock_prices = pd.read_csv('us-shareprices-daily.csv', delimiter=';')
 # Retrieve info
 print('Income data size is: ', income_data.shape)
