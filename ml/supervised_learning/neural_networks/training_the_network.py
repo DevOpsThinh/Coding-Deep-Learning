@@ -8,7 +8,7 @@
 
 import numpy as np
 
-from ml.supervised_learning.classifications import our_own_mnist_lib as mnist
+# from ml.supervised_learning.classifications import our_own_mnist_lib as mnist
 from ml.util import sigmoid, prepend_bias
 
 
@@ -109,4 +109,4 @@ def softmax(logits):
     return exponentials / np.sum(exponentials, axis=1).reshape(-1, 1)
 
 
-w1, w2 = train(mnist.X_train, mnist.Y_train, mnist.X_test, mnist.Y_test, _n_hidden_nodes=200, iterations=10000, lr=0.01)
+# w1, w2 = train(mnist.X_train, mnist.Y_train, mnist.X_test, mnist.Y_test, _n_hidden_nodes=200, iterations=10000, lr=0.01)

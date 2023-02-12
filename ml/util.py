@@ -11,6 +11,20 @@ plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
 
 
+def mesh(values):
+    """
+    Generate a mesh over one-dimensional data.
+    The mesh() functionality were inspired by the
+    documentation of the BSD-licensed scikit-learn library.
+    """
+    a_range = values.max() - values.min()
+    padding_percent = 5
+    padding = a_range * padding_percent * 0.01
+    resolution = 1000
+    interval = (a_range + 2 * a_range * padding) / resolution
+    return np.arange(values.min() - padding, values.max() + padding, interval)
+
+
 def one_hot_encoding(y, a_number):
     """
     A way of encoding labels is called one-hot encoding
