@@ -12,10 +12,15 @@ import numpy as np
 
 from ml.util import prepend_bias, one_hot_encoding
 
-TRAIN_IMAGE = "../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
-TRAIN_LABEL = "../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
-TEST_IMAGE = "../../../fundamentals/datasets/mnist/t10k-images-idx3-ubyte.gz"
-TEST_LABEL = "../../../fundamentals/datasets/mnist/t10k-labels-idx1-ubyte.gz"
+# TRAIN_IMAGE = "../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
+# TRAIN_LABEL = "../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
+# TEST_IMAGE = "../../../fundamentals/datasets/mnist/t10k-images-idx3-ubyte.gz"
+# TEST_LABEL = "../../../fundamentals/datasets/mnist/t10k-labels-idx1-ubyte.gz"
+
+TRAIN_IMAGE = "../../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
+TRAIN_LABEL = "../../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
+TEST_IMAGE = "../../../../fundamentals/datasets/mnist/t10k-images-idx3-ubyte.gz"
+TEST_LABEL = "../../../../fundamentals/datasets/mnist/t10k-labels-idx1-ubyte.gz"
 
 
 def load_images(filename):
