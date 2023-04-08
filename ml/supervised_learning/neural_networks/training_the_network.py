@@ -37,8 +37,8 @@ def report(iteration, x_train, y_train, x_test, y_test, _w1, _w2):
     y_hat, _ = forward(x_train, _w1, _w2)
     training_loss = loss(y_train, y_hat)
     classifications = classify(x_test, _w1, _w2)
-    accuracy = np.average(classifications == y_test) * 100.0
-    print("Iteration: %5d, Loss: %.8f, Accuracy: %.2f%%" % (iteration, training_loss, accuracy))
+    _accuracy = np.average(classifications == y_test) * 100.0
+    print("Iteration: %5d, Loss: %.8f, Accuracy: %.2f%%" % (iteration, training_loss, _accuracy))
 
 
 def initialize_weights(_n_input_variables, _n_hidden_nodes, _n_classes):
@@ -56,6 +56,10 @@ def initialize_weights(_n_input_variables, _n_hidden_nodes, _n_classes):
     _w2 = np.random.randn(w2_rows, _n_classes) * np.sqrt(1 / w2_rows)
 
     return _w1, _w2
+
+
+def accuracy(_x, _y_unencoded, _w1, _w2):
+    return np.average(classify(_x, _w1, _w2) == _y_unencoded) * 100.0
 
 
 def classify(_x, _w1, _w2):
@@ -107,6 +111,5 @@ def softmax(logits):
     """The Softmax function"""
     exponentials = np.exp(logits)
     return exponentials / np.sum(exponentials, axis=1).reshape(-1, 1)
-
 
 # w1, w2 = train(mnist.X_train, mnist.Y_train, mnist.X_test, mnist.Y_test, _n_hidden_nodes=200, iterations=10000, lr=0.01)

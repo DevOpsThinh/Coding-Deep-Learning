@@ -10,7 +10,7 @@ import struct
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ml.util import prepend_bias, one_hot_encoding
+from ml.util import prepend_bias, one_hot_encoding, load_images, load_labels
 
 # TRAIN_IMAGE = "../../../fundamentals/datasets/mnist/train-images-idx3-ubyte.gz"
 # TRAIN_LABEL = "../../../fundamentals/datasets/mnist/train-labels-idx1-ubyte.gz"
@@ -23,14 +23,6 @@ TEST_IMAGE = "../../../../fundamentals/datasets/mnist/t10k-images-idx3-ubyte.gz"
 TEST_LABEL = "../../../../fundamentals/datasets/mnist/t10k-labels-idx1-ubyte.gz"
 
 
-def load_images(filename):
-    """Decodes images from MNIST's library files"""
-    with gzip.open(filename, "rb") as f:
-        _ignored, n_images, columns, rows = struct.unpack('>IIII', f.read(16))
-        all_pixels = np.frombuffer(f.read(), dtype=np.uint8)
-        return all_pixels.reshape(n_images, columns * rows)
-
-
 # 60000 images, each 785 (1 bias + 28 * 28) elements
 X_train_data = prepend_bias(load_images(TRAIN_IMAGE))
 print(X_train_data.shape)
@@ -41,16 +33,6 @@ print(X_test_data.shape)
 # Neural networks #
 X_train = load_images(TRAIN_IMAGE)  # no bias - 784 elements
 X_test = load_images(TEST_IMAGE)  # no bias - 784 elements
-
-
-def load_labels(filename):
-    """Loads MNIST labels into a Numpy array, then molds that array into a
-        one-column matrix.
-    """
-    with gzip.open(filename, "rb") as f:
-        f.read(8)
-        all_labels = f.read()
-        return np.frombuffer(all_labels, dtype=np.uint8).reshape(-1, 1)
 
 
 def encode_fives(y):
