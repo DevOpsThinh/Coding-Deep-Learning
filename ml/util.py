@@ -83,7 +83,7 @@ def train(x, y, iterations, lr):
 
 
 def sigmoid(z):
-    """The logistic function: z = 1 / (1 + e^-z)"""
+    """ The logistic function: z = 1 / (1 + e^-z) """
     return 1 / (1 + np.exp(-z))
 
 

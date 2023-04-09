@@ -82,3 +82,10 @@ plt.xticks(fontsize=15)
 plt.yticks(fontsize=15)
 plt.legend(fontsize=30)
 plt.show()
+
+# Results:
+# 9996 > Training loss: 0.14478 - Test loss: 0.15406
+# 9997 > Training loss: 0.14478 - Test loss: 0.15406
+# 9998 > Training loss: 0.14477 - Test loss: 0.15405
+# 9999 > Training loss: 0.14476 - Test loss: 0.15405
+# Training accuracy: 10.06%, Test accuracy: 95.46%
