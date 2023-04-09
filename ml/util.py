@@ -4,7 +4,6 @@
 # The helper functions
 import gzip
 import struct
-
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
@@ -12,6 +11,21 @@ import seaborn as sns
 # Set the plotting DPI settings to be a bit higher.
 plt.rcParams['figure.figsize'] = [8.0, 5.0]
 plt.rcParams['figure.dpi'] = 150
+
+
+def standardize_sets(training_set, test_set):
+    """ Standardized datasets"""
+    average = np.average(training_set)
+    standard_deviation = np.std(training_set)
+    training_set_standardized = (training_set - average) / standard_deviation
+    test_set_standardized = (test_set - average) / standard_deviation
+    return training_set_standardized, test_set_standardized
+
+
+def standardize_inputs(_inputs):
+    """ Standardized data (input variables) """
+    s_inputs = (_inputs - np.average(_inputs)) / np.std(_inputs)
+    return s_inputs
 
 
 def mesh(values):

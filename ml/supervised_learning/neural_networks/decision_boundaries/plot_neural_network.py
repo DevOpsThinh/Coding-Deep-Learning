@@ -38,15 +38,19 @@ def plot_data_by_label(input_variables, labels, label_selector, symbol):
 x1, x2, y = load_text_dataset("../../../../fundamentals/datasets/brain_friendly/non_linearly_separable.txt")
 # x1, x2, y = load_text_dataset("../../../../fundamentals/datasets/brain_friendly/circles.txt")
 
+# Train classifier
 X_train = X_test = np.column_stack((x1, x2))
 Y_train_unencoded = Y_test = y.astype(int).reshape(-1, 1)
 Y_train = one_hot_encoding(Y_train_unencoded, 2)
 w1, w2 = tn.train(X_train, Y_train, X_test, Y_test,
                   _n_hidden_nodes=10, iterations=100000, lr=0.3)
 
+# Plot the data points
 plot_boundary(X_train, w1, w2)
 plot_data_by_label(X_train, Y_train_unencoded, 0, 'bs')
 plot_data_by_label(X_train, Y_train_unencoded, 1, 'g^')
+
+# Plot the axes
 plt.gca().axes.set_xlabel("Input A", fontsize=20)
 plt.gca().axes.set_ylabel("Input B", fontsize=20)
 plt.gca().axes.xaxis.set_ticklabels([])
