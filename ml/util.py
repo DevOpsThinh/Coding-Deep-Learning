@@ -167,6 +167,20 @@ def load_images(fileName):
         return all_pixels.reshape(n_images, columns * rows)
 
 
+def load_seeded_shuffled_text_dataset(text_dataset):
+    data_to_load = np.loadtxt(text_dataset, skiprows=1, unpack=True).T
+    np.random.seed(12345)
+    np.random.shuffle(data_to_load)
+
+    x_raw = data_to_load[:, 0:2]
+    x_min = x_raw.min(axis=0)
+    x_max = x_raw.max(axis=0)
+    # Rescale data
+    x = (x_raw - x_min) / (x_max - x_min) - 0.5
+    y = data_to_load[:, 2].astype(int).reshape(-1, 1)
+    return x, y
+
+
 def load_text_dataset(text_dataset):
     return np.loadtxt(text_dataset, skiprows=1, unpack=True)
 
