@@ -1,8 +1,14 @@
 # Author: Nguyen Truong Thinh
 # Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
 # Programming via Vectorization
+
 import jax.numpy as jnp
+import n1 as n1
+import n2
+import n3
 import numpy as np
+import timeit
+import r3
 from jax import jit
 
 
@@ -52,8 +58,8 @@ X2 = np.clip(X, 0, 1)  # (about 300 -400 times faster)
 print(np.sum((X1 - X2) * (X1 - X2)))
 
 
-# %timeit clip_loops(X)
-# %timeit np.clip(X, 0, 1)
+timeit.timeit(clip_loops(X))
+timeit.timeit(np.clip(X, 0, 1))
 
 
 def cov_vec_cpu(x_matrix):
@@ -71,9 +77,9 @@ def cov_jax_gpu(x_matrix):
 # Compare
 a_matrix = np.random.normal(size=(300, 784))
 
-# %timeit -n1 -r1 cov_loops(a_matrix)
-# %timeit -n2 -r2 cov_vec_cpu(a_matrix)
-# %timeit -n3 -r3 cov_jax_gpu(a_matrix)
+# timeit.timeit(-n1, -r1, cov_loops(a_matrix))
+# timeit.timeit(-n2, -r2, cov_vec_cpu(a_matrix))
+# timeit.timeit(-n3, -r3, cov_jax_gpu(a_matrix))
 b_matrix = cov_loops(a_matrix)
 c_matrix = cov_vec_cpu(a_matrix)
 d_matrix = cov_jax_gpu(a_matrix)
@@ -81,8 +87,8 @@ print(np.trace(b_matrix), np.trace(c_matrix), np.trace(d_matrix))
 
 a_matrix = np.random.normal(size=(5000, 784))
 
-# %timeit cov_vec_cpu(a_matrix)
-# %timeit cov_jax_gpu(a_matrix)
+timeit.timeit(cov_vec_cpu(a_matrix))
+timeit.timeit(cov_jax_gpu(a_matrix))
 
 c_matrix = cov_vec_cpu(a_matrix)
 d_matrix = cov_jax_gpu(a_matrix)
