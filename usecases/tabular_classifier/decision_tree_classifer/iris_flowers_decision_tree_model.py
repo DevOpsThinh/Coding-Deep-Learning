@@ -1,8 +1,15 @@
+# Author/ Learner: Nguyen Truong Thinh
+# Contact me: nguyentruongthinhvn2020@gmail.com || +84393280504
+#
+# Use case: Create a Decision Tree classification model that can be used to convert into the Core ML Format
+# via CoreML Tool .
+# The model will be trained & converted on the popular UCI ML Iris flowers dataset.
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import pydotplus
-
+# Scikit-learn: 1.1.2
 from sklearn import datasets
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -44,7 +51,7 @@ df_iris_target_test = iris_split[3]
 # https:/scikit-learn.org/stable/modules;generated/sklearn.tree.DecisionTreeClassifier.html
 # Train a DTM
 model = DecisionTreeClassifier(random_state=17)
-model.fit(df_iris_features_train, df_iris_target_train.values.ravel())
+model_trained = model.fit(df_iris_features_train, df_iris_target_train.values.ravel())
 print(model.feature_importances_)
 # Get predictions from model, and compute accuracy
 predictions = model.predict(df_iris_features_test)
@@ -56,7 +63,7 @@ dot_data = StringIO()
 export_graphviz(model, out_file=dot_data, filled=True, rounded=True,
                 special_characters=True, feature_names=df_iris_features.columns)
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
-graph.write_png("iris_flow_dtm.png")
+graph.write_png("iris_flowers_dtm.png")
 Image(graph.create_png())
 
 
