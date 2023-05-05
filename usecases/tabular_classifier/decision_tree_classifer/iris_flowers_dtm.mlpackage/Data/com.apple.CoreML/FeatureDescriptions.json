@@ -1,0 +1,27 @@
+{
+  "Outputs" : {
+    "target" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "classProbability" : {
+      "MLFeatureShortDescription" : "--"
+    }
+  },
+  "Inputs" : {
+    "sepal length (cm)" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "sepal width (cm)" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "petal length (cm)" : {
+      "MLFeatureShortDescription" : "--"
+    },
+    "petal width (cm)" : {
+      "MLFeatureShortDescription" : "--"
+    }
+  },
+  "TrainingInputs" : {
+
+  }
+}

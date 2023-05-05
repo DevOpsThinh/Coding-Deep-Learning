@@ -26,6 +26,10 @@ ___
 - PyCharm 2022.2 (Professional Edition)
 - Python 3.7 or above
 
+### Datasets Resource:
+
+1. **[Kaggle](https://www.kaggle.com/uciml/pima-indians-diabetes-database)**
+2. **[UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)**
 ___
 
 ### References

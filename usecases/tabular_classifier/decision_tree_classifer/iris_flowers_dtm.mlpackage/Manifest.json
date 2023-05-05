@@ -6,6 +6,18 @@
             "description": "CoreML Model Specification",
             "name": "model.mlmodel",
             "path": "com.apple.CoreML/model.mlmodel"
+        },
+        "9F8A6355-20F8-474B-955A-1B8072AE287B": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        },
+        "C1A62F80-57C4-43DE-BBD3-16E6BE8CB283": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
         }
     },
     "rootModelIdentifier": "7360340A-F6CF-46AC-99E4-3E2868896A7B"
