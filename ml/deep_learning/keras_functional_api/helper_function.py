@@ -5,40 +5,92 @@
 #           A collection of utilities functions
 
 from keras import regularizers
-from keras.initializers import initializers_v1
-from keras import backend as be
 
-from keras.models import Model
+from keras.initializers import initializers_v1
 from keras.layers.convolutional import MaxPooling2D, Conv2D, AveragePooling2D
-from keras.layers import Input, Dropout, Dense, Flatten, Activation
+from keras.layers import Activation
 from keras.layers.merging import concatenate
 from keras.layers.normalization.batch_normalization import BatchNormalization
-from keras.optimizers import Adam
 
 # Hyperparameters we can adjust
-DROPOUT_PROBABILITY = 0.1
-INITIAL_LEARNING_RATE = 0.001
 L2_REGULARIZATION_AMOUNT = 0.00004
 
-# Adjust these to match the dimensions of our input image.
-IMAGE_HEIGHT = 299
-IMAGE_WIDTH = 299
-IMAGE_CHANNELS = 3
 
-# Reduce this if this model does not fit on our GPU.
-BATCH_SIZE = 24
+def build_inception_v4_conv_base(input_tensor):
+    """
+    Create the convolutions base portion of the InceptionV4 network.
+    :param input_tensor:
+    :return:
+    """
+    # The stem
+    conv_base = build_inception_v4_stem(input_tensor)
+    # 4 Inception A blocks
+    conv_base = build_inception_a_block(conv_base)
+    conv_base = build_inception_a_block(conv_base)
+    conv_base = build_inception_a_block(conv_base)
+    conv_base = build_inception_a_block(conv_base)
+    # 1 Reduction A block
+    conv_base = build_reduction_a_block(conv_base)
+    # 7 Inception B blocks
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    conv_base = build_inception_b_block(conv_base)
+    # 1 Reduction B block
+    conv_base = build_reduction_b_block(conv_base)
+    # 3 Inception C blocks
+    conv_base = build_inception_c_block(conv_base)
+    conv_base = build_inception_c_block(conv_base)
+    conv_base = build_inception_c_block(conv_base)
+
+    return conv_base
+
+
+def build_inception_v4_stem(input_tensor):
+    """
+    Create the Inception-v4 stem of the Inception Architecture
+    :param input_tensor: The input image tensor
+    :return: outputs of all input branches
+    """
+    # First stage of the stem:
+    stem = conv2d_batch_norm_relu(input_tensor, 32, 3, 3, strides=(2, 2), padding='valid')
+    stem = conv2d_batch_norm_relu(stem, 32, 3, 3, padding='valid')
+    stem = conv2d_batch_norm_relu(stem, 64, 3, 3)
+    # Second stage of the stem:
+    left_1 = MaxPooling2D((3, 3), strides=(2, 2), padding='valid')(stem)
+    right_1 = conv2d_batch_norm_relu(stem, 96, 3, 3, strides=(2, 2), padding='valid')
+    # Concatenate all the results from the two branches
+    stem = concatenate([left_1, right_1], axis=-1)
+    # Third stage of the stem:
+    left_2 = conv2d_batch_norm_relu(stem, 64, 1, 1)
+    left_2 = conv2d_batch_norm_relu(left_2, 96, 3, 3, padding='valid')
+    right_2 = conv2d_batch_norm_relu(stem, 64, 1, 1)
+    right_2 = conv2d_batch_norm_relu(right_2, 64, 1, 7)
+    right_2 = conv2d_batch_norm_relu(right_2, 64, 7, 1)
+    right_2 = conv2d_batch_norm_relu(right_2, 96, 3, 3, padding='valid')
+    # Concatenate all the results from the two branches
+    stem = concatenate([left_2, right_2], axis=-1)
+    # Fourth stage of the stem:
+    left_3 = conv2d_batch_norm_relu(stem, 192, 3, 3, strides=(2, 2), padding='valid')
+    right_3 = MaxPooling2D((3, 3), strides=(2, 2), padding='valid')(stem)
+    # Concatenate all the results from the two branches
+    stem = concatenate([left_3, right_3], axis=-1)
+    return stem
 
 
 def build_reduction_b_block(input_tensor):
     """
-    A reduction block: Transform a 35x35 input into a 17x17 input in an efficient manner.
+    A reduction block: Transform a 17x17 input into a 8x8 input in an efficient manner.
     :param input_tensor: The input image tensor
     :return: outputs of the three input branches
     """
     # This is the first branch from the left
     branch_left = MaxPooling2D((3, 3), strides=(2, 2), padding='valid')(input_tensor)
     # This is the middle branch
-    branch_middle = conv2d_batch_norm_relu(input_tensor, 192 , 1, 1)
+    branch_middle = conv2d_batch_norm_relu(input_tensor, 192, 1, 1)
     branch_middle = conv2d_batch_norm_relu(branch_middle, 192, 3, 3, strides=(2, 2), padding='valid')
     # This is the right branch
     branch_right = conv2d_batch_norm_relu(input_tensor, 256, 1, 1)
