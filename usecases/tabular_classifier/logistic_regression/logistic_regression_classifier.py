@@ -48,7 +48,7 @@ for train_indices, test_indices in kf.split(df_diabetes_features, y = df_diabete
 
     # Train a logistic regression model
     model = LogisticRegression(penalty='l2', fit_intercept=True, solver="liblinear", multi_class='ovr')
-    trained_model = model.fit(df_diabetes_features_train, df_diabetes_target_train.values.ravel())
+    trained_model_kfcv = model.fit(df_diabetes_features_train, df_diabetes_target_train.values.ravel())
 
     # Get predictions
     predictions = model.predict(df_diabetes_features_test)
