@@ -4,6 +4,9 @@
 # Topic: Deep Learning with Keras framework (A deep learning library)
 #           A collection of utilities functions
 
+import numpy as np
+import matplotlib.pyplot as plt
+
 from keras import regularizers
 
 from keras.initializers import initializers_v1
@@ -16,11 +19,28 @@ from keras.layers.normalization.batch_normalization import BatchNormalization
 L2_REGULARIZATION_AMOUNT = 0.00004
 
 
+def plot_training_stats(history):
+    """Display a graph of the training process"""
+    plt.figure(figsize=(8, 8))
+
+    plt.title("Learning curve")
+    plt.plot(history.history["loss"], label="loss")
+    plt.plot(history.history["val_loss"], label="val_loss")
+    plt.plot(history.history["acc"], label="acc")
+    plt.plot(history.history["val_acc"], label="val_acc")
+
+    plt.plot(np.argmin(history.history["val_loss"]), np.min(history.history["val_loss"]),
+             marker="x", color="r", label="best model")
+    plt.xlabel("Epochs")
+    plt.ylabel("Accuracy and Loss")
+    plt.legend()
+
+
 def build_inception_v4_conv_base(input_tensor):
     """
     Create the convolutions base portion of the InceptionV4 network.
-    :param input_tensor:
-    :return:
+    :param input_tensor: The input image tensor
+    :return: The convolutional base
     """
     # The stem
     conv_base = build_inception_v4_stem(input_tensor)
@@ -220,5 +240,3 @@ def conv2d_batch_norm_relu(input_tensor, num_kernels, kernel_rows, kernel_cols, 
     output = Activation('relu')(x)
 
     return output
-
-
