@@ -15,16 +15,18 @@ from keras.preprocessing.image import ImageDataGenerator
 from sklearn.model_selection import train_test_split
 
 from inception_v4_network import model
+from ml.deep_learning.keras_functional_api.helper_function import plot_training_stats
 
 # ----------------- A computer without an NVIDIA GPU,
-# then uncomment the first two statements
-# weights_path = './inceptionv4.dogscats_weights.h5'
+# Download it at: https://drive.google.com/file/d/1NqMs2js-uOyOLL9MB0nzX0AoHx-hy8ty/view?usp=sharing
+# Place it on the following path: "ml/deep_learning/keras_functional_api/inceptionv4.dogscats_weights.h5"
+# then uncomment the first two statements:
+
+# weights_path = 'inceptionv4.dogscats_weights.h5'
 # model.load_weights(weights_path, by_name=True)
 
 # ----------------- A computer have an NVIDIA GPU
 # Adjust these to match the dimensions of our input image.
-from ml.deep_learning.keras_functional_api.helper_function import plot_training_stats
-
 IMAGE_HEIGHT = 299
 IMAGE_WIDTH = 299
 # Reduce this if this model does not fit on your GPU.
@@ -114,3 +116,10 @@ model.save_weights('inception_v4_dogs_cats_weights.h5')
 
 end_time = datetime.datetime.now()
 print(f'training completed in: {end_time - start_time}')
+
+"""
+=> Attention! (Note):
+The Inception-v4 model was trained on a Windows 10 computer workstation with 64GB of RAM 
+and an NVIDIA RTX 2080Ti 11Gb graphics card. It took about three hours to train 30 epochs, 
+with the best model having an accuracy of 87.9 percent.
+"""

@@ -1,2 +1,4 @@
+inception_v4_dogscats.mlmodel
+inceptionv4_dogscats_weights.h5
 us-shareprices-daily.csv
 /.idea

@@ -39,7 +39,7 @@ network_output = Dense(units=2, activation='softmax')(flattened_output)
 # Use the Adam optimizer and compile the model.
 adam_opt = Adam(lr=INITIAL_LEARNING_RATE)
 model = Model(INPUT_TENSOR, network_output, name='InceptionV4')
-model.compile(optimizer=adam_opt, loss='binary_crossentropy', metrics=["accuracy"])
+compiled_model = model.compile(optimizer=adam_opt, loss='binary_crossentropy', metrics=["accuracy"])
 # Display a summary of the layers of the model.
 model.summary()
 # ===========================================

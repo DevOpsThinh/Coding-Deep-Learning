@@ -175,10 +175,10 @@ def build_inception_b_block(input_tensor):
     """
     # (384 1x1 convolutions) - This is the first branch for the left
     branch_a = conv2d_batch_norm_relu(input_tensor, 384, 1, 1)
-    # This is the second branch for the left
+    # This is the second branch from the left
     branch_b = AveragePooling2D((3, 3), strides=(1, 1), padding='same')(input_tensor)
     branch_b = conv2d_batch_norm_relu(branch_b, 128, 1, 1)
-    # This  is the third branch from the left
+    # This is the third branch from the left
     branch_c = conv2d_batch_norm_relu(input_tensor, 192, 1, 1)
     branch_c = conv2d_batch_norm_relu(branch_c, 224, 1, 7)
     branch_c = conv2d_batch_norm_relu(branch_c, 256, 7, 1)
