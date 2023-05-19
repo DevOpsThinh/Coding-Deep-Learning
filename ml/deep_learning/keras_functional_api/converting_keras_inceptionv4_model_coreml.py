@@ -9,6 +9,7 @@ import coremltools as ct
 
 from ml.deep_learning.keras_functional_api.inception_v4_network import model
 
+# https://drive.google.com/file/d/1NqMs2js-uOyOLL9MB0nzX0AoHx-hy8ty/view?usp=share_link
 weights_path = 'inceptionv4_dogscats_weights.h5'
 model.load_weights(weights_path)
 
