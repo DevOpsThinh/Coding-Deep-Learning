@@ -33,6 +33,15 @@ ___
 ___
 
 ### Illustrated results
+
+#### Gym's Built-in & third-party environments
+- Lunar Lander<br>
+<img src="ml/rl_in_robotics/images/lunar_lander.gif" height="480"/> <br>
+- Mountain Car<br>
+<img src="ml/rl_in_robotics/images/mountain_car.gif" height="480"/> <br>
+- Phoenix<br>
+<img src="ml/rl_in_robotics/images/phoenix.gif" height="480"/> <br>
+
 #### How reinforcement learning helps a robot balance a pole
 - Random movements cannot keep the balance for a long time<br>
 <img src="ml/rl_in_robotics/images/cart-pole-rl.gif" height="480"/> <br>
