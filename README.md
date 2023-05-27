@@ -32,6 +32,13 @@ ___
 2. **[UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/index.php)**
 ___
 
+### Illustrated results
+#### How reinforcement learning helps a robot balance a pole
+- Random movements cannot keep the balance for a long time<br>
+<img src="ml/rl_in_robotics/images/cart-pole-rl.gif" height="480"/> <br>
+- The better than random actions<br>
+<img src="ml/rl_in_robotics/images/cart-pole-balancing-rl.gif" height="480"/> <br>
+
 ### References
 
 1. **[Machine Learning with Python for Everyone](https://www.informit.com/store/machine-learning-with-python-for-everyone-9780134845623)**
