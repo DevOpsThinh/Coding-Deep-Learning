@@ -9,6 +9,39 @@ import random
 from time import sleep
 
 import gym
+import pygame
+
+
+def gym_rl_custom_tasks(env, episodes, action, mode, duration):
+    """
+      Unifying all RL tasks by Gym toolkit with seeding
+      """
+    init_reset_environment(env)
+
+    gym_customize_tasks(env, episodes, action, mode, duration)
+
+    env.close()
+
+
+def init_reset_environment(env):
+    env = env
+    init_state = env.reset()
+    return env
+
+
+def gym_customize_tasks(env, episodes, action, mode="human", duration=1):
+    """
+    Unifying RL tasks by Gym toolkit
+    """
+    for _ in range(episodes):
+        if mode == "human":
+            env.render(mode)
+        else:
+            env.render()
+
+        action = action
+        state, reward, done, debug = env.step(action)
+        sleep(duration)
 
 
 def gym_rl_tasks_with_seed(env, episodes, action):
@@ -57,6 +90,21 @@ def init_environment(rl_problem):
     """
     env = gym.make(rl_problem)
     return env
+
+
+# Utilities function
+
+
+def get_system_fonts():
+    """
+    Get all available fonts.
+    :return: A list of all the fonts available on the system.
+    """
+    fonts = pygame.font.get_fonts()
+    index = 1
+    for font in fonts:
+        print(f'{index}. {font},')
+        index += 1
 
 
 def check_list_of_environments():

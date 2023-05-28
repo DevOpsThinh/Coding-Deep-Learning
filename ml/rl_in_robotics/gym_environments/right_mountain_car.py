@@ -9,7 +9,7 @@
 from ml.rl_in_robotics.utility import gym_rl_tasks, init_environment
 
 # Hyperparameters we can adjust
-EPISODES = 30
+EPISODES = 10
 
 env = init_environment("MountainCar-v0")
 
