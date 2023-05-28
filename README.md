@@ -34,6 +34,10 @@ ___
 
 ### Illustrated results
 
+#### Custom environment with Gym
+- Coin Catcher<br>
+<img src="ml/rl_in_robotics/images/coin_catcher.gif" height="480"/> <br>
+
 #### Gym's Built-in & third-party environments
 - Lunar Lander<br>
 <img src="ml/rl_in_robotics/images/lunar_lander.gif" height="480"/> <br>

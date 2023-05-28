@@ -26,7 +26,7 @@ def gym_rl_custom_tasks(env, episodes, action, mode, duration):
 def init_reset_environment(env):
     env = env
     init_state = env.reset()
-    return env
+    return init_state
 
 
 def gym_customize_tasks(env, episodes, action, mode="human", duration=1):
@@ -36,11 +36,14 @@ def gym_customize_tasks(env, episodes, action, mode="human", duration=1):
     for _ in range(episodes):
         if mode == "human":
             env.render(mode)
+        elif mode == "ascii":
+            env.render("ascii")
         else:
             env.render()
 
         action = action
-        state, reward, done, debug = env.step(action)
+        # state, reward, done, debug = env.step(action)
+        env.step(action)
         sleep(duration)
 
 
