@@ -8,14 +8,86 @@
 import random
 from time import sleep
 
+import numpy as np
 import gym
 import pygame
 
 
+def run_epsilon_greedy_policy(env, mode, policy, episodes=1000, exploration=10, epsilon=.1):
+    """
+    Epsilon Greedy Policy In Action
+    """
+    state = env.reset()
+    rewards = []
+
+    for e in range(episodes):
+        action = []
+
+        match policy:
+            case 1:
+                action = greedy_policy(state, exploration)
+            case 2:
+                action = epsilon_greedy_policy(state, exploration, epsilon)
+
+        state, reward, done, debug = env.step(action)
+        rewards.append(reward)
+
+    for _ in range(episodes):
+        if mode == "human":
+            env.render(mode)
+        elif mode == "ascii":
+            env.render("ascii")
+        else:
+            env.render()
+
+    env.close()
+
+    return env, rewards
+
+
+def epsilon_greedy_policy(state, explore=10, epsilon=.1):
+    """
+    Implement of the Epsilon Greedy Policy
+    """
+    machines = len(state)
+    trials = sum(len(state[m]) for m in range(machines))
+    total_explore_trials = machines * explore
+
+    # Exploration
+    if trials <= total_explore_trials:
+        return trials % machines
+    # Random machine
+    if random.random() < epsilon:
+        return random.randint(0, machines - 1)
+    # Exploitation
+    avg_rewards = [sum(state[m]) / len(state[m]) for m in range(machines)]
+
+    best_machine = np.argmax(avg_rewards)
+    return best_machine
+
+
+def greedy_policy(state, explore=10):
+    """
+    Implement of the Greedy Policy
+    """
+    machines = len(state)
+    trials = sum(len(state[m]) for m in range(machines))
+    total_explore_trials = machines * explore
+
+    # Exploration
+    if trials <= total_explore_trials:
+        return trials % machines
+    # Exploitation
+    avg_rewards = [sum(state[m]) / len(state[m]) for m in range(machines)]
+
+    best_machine = np.argmax(avg_rewards)
+    return best_machine
+
+
 def gym_rl_custom_tasks(env, episodes, action, mode, duration):
     """
-      Unifying all RL tasks by Gym toolkit with seeding
-      """
+    Unifying all RL custom tasks by Gym toolkit
+    """
     init_reset_environment(env)
 
     gym_customize_tasks(env, episodes, action, mode, duration)
