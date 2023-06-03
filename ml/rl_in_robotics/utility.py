@@ -94,7 +94,7 @@ def thompson_sampling_policy(state, visualize=True, plot_title=''):
     if visualize:
         plt.title(f'Thompson Sampling: Beta Distribution - {plot_title}')
         plt.legend()
-        plt.show(m)
+        plt.show()
 
     return action
 

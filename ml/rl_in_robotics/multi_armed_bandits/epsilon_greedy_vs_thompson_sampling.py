@@ -35,8 +35,8 @@ rewards = {
                           for _ in range(EPISODES)],
 }
 
-for p, r in rewards.items():
-    plt.plot(np.average(r, axis=0), label=p)
+for policy, reward in rewards.items():
+    plt.plot(np.average(reward, axis=0), label=f'{policy}')
 
 plt.title("Battle")
 plt.xlabel("Rounds")
