@@ -7,27 +7,40 @@
 # Necessary packages
 import random
 from time import sleep
+from scipy.stats import beta
 
+import matplotlib.pyplot as plt
 import numpy as np
 import gym
 import pygame
 
 
-def run_epsilon_greedy_policy(env, mode, policy, episodes=1000, exploration=10, epsilon=.1):
+# Set the plotting DPI settings to be a bit higher.
+plt.rcParams['figure.figsize'] = [8.0, 5.0]
+plt.rcParams['figure.dpi'] = 150
+
+
+def run_a_policy(env, mode, policy, balance=1000, episodes=50, exploration=10, epsilon=.1, visualize=False):
     """
-    Epsilon Greedy Policy In Action
+    Reinforcement Learning's Policies Algorithm In Action
+    For our policy parameter case: https://www.freecodecamp.org/news/python-switch-statement-switch-case-example/
     """
     state = env.reset()
     rewards = []
 
-    for e in range(episodes):
-        action = []
+    for e in range(balance):
+        action = None
 
         match policy:
             case 1:
                 action = greedy_policy(state, exploration)
             case 2:
                 action = epsilon_greedy_policy(state, exploration, epsilon)
+            case 3:
+                if e % episodes == 0:
+                    action = thompson_sampling_policy(state, visualize, plot_title=f'Iteration: {e}')
+                else:
+                    action = thompson_sampling_policy(state, False, plot_title=f'Iteration: {e}')
 
         state, reward, done, debug = env.step(action)
         rewards.append(reward)
@@ -43,6 +56,47 @@ def run_epsilon_greedy_policy(env, mode, policy, episodes=1000, exploration=10, 
     env.close()
 
     return env, rewards
+
+
+def thompson_sampling_policy(state, visualize=True, plot_title=''):
+    """
+    Implement of the Thompson Sampling Policy
+    """
+    action = None
+    max_bound = 0
+    colors_list = ['red', 'blue', 'green', 'black', 'yellow']
+    # Iterating each machine
+    for m, trials in state.items():
+        winner = len([r for r in trials if r == 1])
+        loser = len([r for r in trials if r == -1])
+
+        if winner + loser == 0:
+            avg = 0
+        else:
+            avg = round(winner / (winner + loser), 2)
+        # Generating random number for bandit's beta distributions:
+        rad_beta = np.random.beta(winner + 1, loser + 1)
+        if rad_beta > max_bound:
+            max_bound = rad_beta
+            action = m
+        # Visualize
+        if visualize:
+            color = colors_list[m % len(colors_list)]
+            x = np.linspace(beta.ppf(0.01, winner, loser), beta.ppf(0.99, winner, loser), 100)
+            plt.plot(
+                x, beta.ppf(x, winner, loser),
+                label=f'Machine {m}| avg={avg}, v={round(rad_beta, 2)}',
+                color=color,
+                linewidth=3
+            )
+            plt.axvline(x=rad_beta, color=color, linestyle='--')
+
+    if visualize:
+        plt.title(f'Thompson Sampling: Beta Distribution - {plot_title}')
+        plt.legend()
+        plt.show(m)
+
+    return action
 
 
 def epsilon_greedy_policy(state, explore=10, epsilon=.1):
